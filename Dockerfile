@@ -13,10 +13,14 @@ RUN yum install -y git xml2 libxml2-devel curl curl-devel openssl-devel pandoc
 # Plotly needs libcurl
 RUN yum install libcurl-devel -y
 
+# RMySQL needs mysql-devel
+RUN yum install mysql-devel -y
+
 WORKDIR /home/root
 RUN yum install -y R
 
 RUN R -e "install.packages(c('shiny', 'rmarkdown', 'devtools', 'RJDBC', 'dplyr', 'plotly', 'RPostgreSQL', 'lubridate', 'DT'), repos='http://cran.r-project.org', INSTALL_opts='--no-html')"
+RUN R -e "install.packages(c('DBI', 'RMySQL', 'yhatr', 'ggplot2', 'plyr', 'reshape2', 'forecast', 'stringr', 'randomForest', 'rpart', 'e1071', 'kknn', 'txtplot', 'httr', 'jsonlite', 'caret', 'reshape2', 'xgboost', 'magrittr'), repos='http://cran.r-project.org', INSTALL_opts='--no-html')"
 
 #-----------------------
 
